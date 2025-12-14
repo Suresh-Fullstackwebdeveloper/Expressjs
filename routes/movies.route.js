@@ -4,6 +4,7 @@ import {
   movieCreate,
   movieDelete,
   movieUpdate,
+  singleMovie,
 } from "../controllers/movies.controller.js";
 
 const router = express.Router();
@@ -12,6 +13,8 @@ const router = express.Router();
 
 //R- For Reading
 router.get("/", movieIndex);
+
+router.get("/:id", singleMovie);
 
 //C- For Create
 router.post("/", movieCreate);

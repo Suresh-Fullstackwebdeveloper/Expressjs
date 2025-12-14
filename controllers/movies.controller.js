@@ -1,12 +1,15 @@
 import Movie from "../models/movie.model.js";
 
-export const movieIndex = (req, res) => {
-  res.send("All the movies");
+export const movieIndex = async (req, res) => {
+  try {
+    const movies = await Movie.find();
+    res.json(movies);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
 };
 
 export const movieCreate = async (req, res) => {
-  // console.log(req.body);
-
   const newMovie = new Movie({
     title: req.body.title,
     des: req.body.des,
@@ -19,9 +22,20 @@ export const movieCreate = async (req, res) => {
   }
 };
 
-export const movieUpdate = (req, res) => {
-  res.send("updated the movies");
+export const singleMovie = async (req, res) => {
+  try {
+    const movies = await Movie.findById(req.params.id);
+    if (movies == null) {
+      return res.status(404).json({ message: "Cannot Find Movies" });
+    } else {
+      res.json(movies);
+    }
+  } catch (error) {
+    return res.status(500).json({ message: error.message });
+  }
 };
+
+export const movieUpdate = async (req, res) => {};
 
 export const movieDelete = (req, res) => {
   res.send("Deleted the movies");
