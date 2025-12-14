@@ -1,9 +1,11 @@
 export const movieIndex = (req, res) => {
-  res.send("Get the list movies");
+  res.send("All the movies");
 };
 
 export const movieCreate = (req, res) => {
-  res.send("Created the movies");
+  console.log(req.body);
+
+  return res.json(req.body);
 };
 
 export const movieUpdate = (req, res) => {
